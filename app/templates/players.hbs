@@ -1,0 +1,9 @@
+<h2>List of players</h2>
+
+<ul>
+{{#each @model as |player|}}
+  <li>
+    {{player.name}} - {{player.score}}
+  </li>
+{{/each}}
+</ul>
