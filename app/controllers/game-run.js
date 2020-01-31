@@ -52,14 +52,65 @@ export default class GameRunController extends Controller {
     // https://emberjs.github.io/rfcs/0478-tracked-properties-updates.html#when-to-use-get-and-set-1
     set(this.board.find(element => element.key == tile), 'value', sign);
 
-    if (this.currentPlayer == this.playerOne) {
-      this.currentPlayer = this.playerTwo;
+    if (this.isWinMove(tile, sign) === true) {
+      alert(this.currentPlayer.name + " won this game!");
     } else {
-      this.currentPlayer = this.playerOne;
+      if (this.currentPlayer == this.playerOne) {
+        this.currentPlayer = this.playerTwo;
+      } else {
+        this.currentPlayer = this.playerOne;
+      }
     }
   }
 
-  get boardValues(){
-    return this.board;
+  isWinMove(move, playerValue){
+    return (
+      this.horizontal(move, playerValue) ||
+      this.vertical(move, playerValue) ||
+      this.diagonal(move, playerValue)
+    );
+  }
+
+  horizontal(move, playerValue) {
+    let row = move[0];
+
+    let rowItemOneI = (row + 1) % 3;
+    let rowItemTwoI = (row + 2) % 3;
+
+    return (
+      this.board.find(element => element.key == move).value === playerValue &&
+      this.board.find(element => element.key == [rowItemOneI, move[1]].join("")).value === playerValue &&
+      this.board.find(element => element.key == [rowItemTwoI, move[1]].join("")).value === playerValue
+    );
+  }
+
+  vertical(move, playerValue) {
+    let col = move[1];
+
+    let colItemOneJ = (col + 1) % 3;
+    let colItemTwoJ = (col + 2) % 3;
+
+    return (
+      this.board.find(element => element.key == move).value === playerValue &&
+      this.board.find(element => element.key == [move[0], colItemOneJ].join("")).value === playerValue &&
+      this.board.find(element => element.key == [move[0], colItemTwoJ].join("")).value === playerValue
+    );
+  }
+
+  diagonal(move, playerValue) {
+    let row = move[0];
+    let col = move[1];
+
+    let rowItemOneI = (row + 1) % 3;
+    let colItemOneJ = (col + 1) % 3;
+
+    let rowItemTwoI = (row + 2) % 3;
+    let colItemTwoJ = (col + 2) % 3;
+
+    return (
+      this.board.find(element => element.key == move).value === playerValue &&
+      this.board.find(element => element.key == [rowItemOneI, colItemOneJ].join("")).value === playerValue &&
+      this.board.find(element => element.key == [rowItemTwoI, colItemTwoJ].join("")).value === playerValue
+    );
   }
 }
