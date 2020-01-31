@@ -54,6 +54,16 @@ export default class GameRunController extends Controller {
 
     if (this.isWinMove(tile, sign) === true) {
       alert(this.currentPlayer.name + " won this game!");
+
+      let loser_id;
+      if (this.currentPlayer == this.playerOne) {
+        loser_id = this.playerTwo.id;
+      } else {
+        loser_id = this.playerOne.id;
+      }
+
+      this.store.createRecord('game', { winner_id: this.currentPlayer.id, loser_id: loser_id }).save();
+
       this.resetGame();
     } else {
       if (this.currentPlayer == this.playerOne) {
