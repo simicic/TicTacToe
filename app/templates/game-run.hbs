@@ -1,9 +1,9 @@
 <p>
-  {{#paper-select options=@model.players label="Player 1" selected=this.playerOne required=true onChange=(action (mut playerOne)) as |player|}}
+  {{#paper-select options=@model.players label="Player X" selected=this.playerOne required=true onChange=(action (mut playerOne)) as |player|}}
     {{player.name}}
   {{/paper-select}}
 
-  {{#paper-select options=@model.players label="Player 2" selected=this.playerTwo required=true onChange=(action (mut playerTwo)) as |player|}}
+  {{#paper-select options=@model.players label="Player O" selected=this.playerTwo required=true onChange=(action (mut playerTwo)) as |player|}}
     {{player.name}}
   {{/paper-select}}
 
