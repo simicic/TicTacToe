@@ -19,8 +19,8 @@ export default class GameRunController extends Controller {
     super(...arguments);
 
     // initialize board
-    for(let i = 0; i < 3; i++){
-      for(let j = 0; j < 3; j++){
+    for(let j = 0; j < 3; j++){
+      for(let i = 0; i < 3; i++){
         this.board.push({ key: [i, j].join(""), value: "-" });
       }
     }
