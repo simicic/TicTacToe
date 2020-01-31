@@ -13,7 +13,7 @@
 </div>
 
 <div class="layout-row flex layout-align-center-center">
-  {{#paper-button onClick=(action "startGame")}}Start{{/paper-button}}
+  <PaperButton {{on "click" (fn this.startGame)}}>Start</PaperButton>
 </div>
 
 <div class="{{this.showGame}} layout-row flex layout-align-center-center">
