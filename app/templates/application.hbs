@@ -1,5 +1,22 @@
-<div class="container">
-  <div class="body">
-    {{outlet}}
-  </div>
-</div>
+{{#paper-sidenav-container class="inner-sidenav"}}
+
+  {{#paper-sidenav
+    class="md-whiteframe-z2"
+    name="left"
+    open=leftSideBarOpen
+    onToggle=(action (mut leftSideBarOpen))}}
+    {{#paper-toolbar as |toolbar|}}
+      {{#paper-toolbar-tools}}Tic tac toe{{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+    {{#paper-content padding=true}}
+      <p><LinkTo @route='game-run'>Home</LinkTo></p>
+      <p><LinkTo @route='players'>Manage players</LinkTo></p>
+    {{/paper-content}}
+  {{/paper-sidenav}}
+
+  {{#paper-card-content class="flex"}}
+    <div class="layout-fill layout-align-start-center" style="height: 500px; margin-left: 40px">
+      {{outlet}}
+    </div>
+  {{/paper-card-content}}
+{{/paper-sidenav-container}}

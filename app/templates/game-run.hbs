@@ -1,8 +1,4 @@
-<div class="layout-row flex layout-align-center-center">
-  <h2> Game time! </h2>
-</div>
-
-<div class="layout-row flex layout-align-center-center">
+<p>
   {{#paper-select options=@model.players label="Player 1" selected=this.playerOne required=true onChange=(action (mut playerOne)) as |player|}}
     {{player.name}}
   {{/paper-select}}
@@ -10,13 +6,11 @@
   {{#paper-select options=@model.players label="Player 2" selected=this.playerTwo required=true onChange=(action (mut playerTwo)) as |player|}}
     {{player.name}}
   {{/paper-select}}
-</div>
 
-<div class="layout-row flex layout-align-center-center">
   <PaperButton {{on "click" (fn this.startGame)}}>Start</PaperButton>
-</div>
+</p>
 
-<div class="{{this.showGame}} layout-row flex layout-align-center-center">
+<div class="{{this.showGame}} layout-fill layout-align-start-center">
   {{#paper-grid-list cols="3" rowHeight="1:1" class="flex-gt-xs-20" as |grid|}}
     {{#each this.board as |item|}}
       <div {{on "click" (fn this.playTile item.key)}}>
