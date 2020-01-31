@@ -76,13 +76,13 @@ export default class GameRunController extends Controller {
 
   isWinMove(move, playerValue){
     return (
-      this.horizontal(move, playerValue) ||
-      this.vertical(move, playerValue) ||
-      this.diagonal(move, playerValue)
+      this.horizontalWin(move, playerValue) ||
+      this.verticalWin(move, playerValue) ||
+      this.diagonalWin(playerValue)
     );
   }
 
-  horizontal(move, playerValue) {
+  horizontalWin(move, playerValue) {
     let row = move[0];
 
     let rowItemOneI = (row + 1) % 3;
@@ -95,7 +95,7 @@ export default class GameRunController extends Controller {
     );
   }
 
-  vertical(move, playerValue) {
+  verticalWin(move, playerValue) {
     let col = move[1];
 
     let colItemOneJ = (col + 1) % 3;
@@ -108,20 +108,23 @@ export default class GameRunController extends Controller {
     );
   }
 
-  diagonal(move, playerValue) {
-    let row = move[0];
-    let col = move[1];
+  diagonalWin(playerValue) {
+    return this.diagonalDownWin(playerValue) || this.diagonalUpWin(playerValue);
+  }
 
-    let rowItemOneI = (row + 1) % 3;
-    let colItemOneJ = (col + 1) % 3;
-
-    let rowItemTwoI = (row + 2) % 3;
-    let colItemTwoJ = (col + 2) % 3;
-
+  diagonalDownWin(playerValue){
     return (
-      this.board.find(element => element.key == move).value === playerValue &&
-      this.board.find(element => element.key == [rowItemOneI, colItemOneJ].join("")).value === playerValue &&
-      this.board.find(element => element.key == [rowItemTwoI, colItemTwoJ].join("")).value === playerValue
+      this.board.find(element => element.key == "00").value === playerValue &&
+      this.board.find(element => element.key == "11").value === playerValue &&
+      this.board.find(element => element.key == "22").value === playerValue
+    );
+  }
+
+  diagonalUpWin(playerValue){
+    return (
+      this.board.find(element => element.key == "02").value === playerValue &&
+      this.board.find(element => element.key == "11").value === playerValue &&
+      this.board.find(element => element.key == "20").value === playerValue
     );
   }
 
