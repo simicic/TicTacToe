@@ -54,6 +54,7 @@ export default class GameRunController extends Controller {
 
     if (this.isWinMove(tile, sign) === true) {
       alert(this.currentPlayer.name + " won this game!");
+      this.resetGame();
     } else {
       if (this.currentPlayer == this.playerOne) {
         this.currentPlayer = this.playerTwo;
@@ -112,5 +113,15 @@ export default class GameRunController extends Controller {
       this.board.find(element => element.key == [rowItemOneI, colItemOneJ].join("")).value === playerValue &&
       this.board.find(element => element.key == [rowItemTwoI, colItemTwoJ].join("")).value === playerValue
     );
+  }
+
+  resetGame(){
+    for (let tile of this.board) {
+      set(tile, 'value', "-");
+    }
+    this.showGame = 'hide';
+    this.playerOne = null;
+    this.playerTwo = null;
+    this.currentPlayer = null;
   }
 }
