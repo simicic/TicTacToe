@@ -1,0 +1,17 @@
+<h2>Scoreboard</h2>
+
+{{#paper-data-table as |table|}}
+  {{#table.head as |head|}}
+    {{#head.column}}Name{{/head.column}}
+    {{#head.column numeric=true}}Score{{/head.column}}
+  {{/table.head}}
+
+  {{#table.body as |body|}}
+    {{#each @model as |player|}}
+      {{#body.row edit=true as |row|}}
+        {{#row.cell}}{{player.name}}{{/row.cell}}
+        {{#row.cell numeric=true}}{{player.score}}{{/row.cell}}
+       {{/body.row}}
+    {{/each}}
+  {{/table.body}}
+{{/paper-data-table}}

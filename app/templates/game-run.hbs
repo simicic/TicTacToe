@@ -1,0 +1,23 @@
+<p>
+  {{#paper-select options=@model.players label="Player X" selected=this.playerOne required=true onChange=(action (mut playerOne)) as |player|}}
+    {{player.name}}
+  {{/paper-select}}
+
+  {{#paper-select options=@model.players label="Player O" selected=this.playerTwo required=true onChange=(action (mut playerTwo)) as |player|}}
+    {{player.name}}
+  {{/paper-select}}
+
+  <PaperButton {{on "click" (fn this.startGame)}}>Start</PaperButton>
+</p>
+
+<div class="{{this.showGame}} layout-fill layout-align-start-center">
+  {{#paper-grid-list cols="3" rowHeight="1:1" class="flex-gt-xs-20" as |grid|}}
+    {{#each this.board as |item|}}
+      <div {{on "click" (fn this.playTile item.key)}}>
+        {{#grid.tile as |tile|}}
+          <p class='huge'>{{item.value}}</p>
+        {{/grid.tile}}
+      </div>
+    {{/each}}
+  {{/paper-grid-list}}
+</div>
